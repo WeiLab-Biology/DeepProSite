@@ -1,0 +1,60 @@
+import numpy as np
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+from self_attention import *
+from edge_features import EdgeFeatures
+
+
+class GraphTrans(nn.Module):
+    def __init__(self, node_features, edge_features, hidden_dim, num_encoder_layers=4, k_neighbors=30, augment_eps=0., dropout=0.2):
+        super(GraphTrans, self).__init__()
+
+        # Hyperparameters
+        self.augment_eps = augment_eps
+
+        # Edge featurization layers
+        self.EdgeFeatures = EdgeFeatures(edge_features, top_k=k_neighbors, augment_eps=augment_eps)
+
+        # Embedding layers
+        self.W_v = nn.Linear(node_features, hidden_dim, bias=True)
+        self.W_e = nn.Linear(edge_features, hidden_dim, bias=True)
+
+        # Encoder layers
+        self.encoder_layers = nn.ModuleList([
+            TransformerLayer(hidden_dim, hidden_dim * 2, dropout=dropout)
+            for _ in range(num_encoder_layers)
+        ])
+
+        self.W_out = nn.Linear(hidden_dim, 1, bias=True)
+
+        # Initialization
+        for p in self.parameters():
+            if p.dim() > 1:
+                nn.init.xavier_uniform_(p)
+
+
+    def forward(self, X, V, mask):
+        # Prepare node and edge embeddings
+        # X is the alpha-C coordinate matrix; V is the pre-computed and normalized features ProtTrans+DSSP
+        E, E_idx = self.EdgeFeatures(X, mask) # X [B, L, 3] mask [B, L] => E [B, L, K, d_edge]; E_idx [B, L, K]
+
+        # Data augmentation
+        if self.training and self.augment_eps > 0:
+            V = V + 0.1 * self.augment_eps * torch.randn_like(V)
+
+        h_V = self.W_v(V)
+        h_E = self.W_e(E)
+
+        # Encoder is unmasked self-attention
+        mask_attend = gather_nodes(mask.unsqueeze(-1),  E_idx).squeeze(-1)
+        mask_attend = mask.unsqueeze(-1) * mask_attend # mask_attend [B, L, K] 0/1矩阵 L维度上是0代表是padding的aa，K维度上是0说明这个邻居其实是padding的aa 这条边不存在
+        for layer in self.encoder_layers:
+            h_EV = cat_neighbors_nodes(h_V, h_E, E_idx) # edge_ij的特征和node_j的特征concat在一起
+            h_V = layer(h_V, h_EV, mask_V=mask, mask_attend=mask_attend)
+
+        logits = self.W_out(h_V).squeeze(-1) # [B, L]
+        return logits
+
+
