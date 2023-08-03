@@ -23,7 +23,7 @@ We use ZN as our training dataset.
 Inferring command:
 
 ```
-CUDA_VISIBLE_DEVICES=0 python infer_lms.py --task ZN --test --seed 2022 --run_id run_name0409_PCA_main10407_6 --dataset_path infer_data/ZN/ --feature_path infer_data/ZN/
+CUDA_VISIBLE_DEVICES=0 python infer.py --task PRO --test --seed 2022 --run_id weights --dataset_path infer_data/PRO/ --feature_path infer_data/PRO/
 ```
 
 # Pretrained Models
