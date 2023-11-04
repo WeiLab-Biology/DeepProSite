@@ -3,7 +3,7 @@
 
 # Framework
 The framework shows as following picture:
-![](imgs/ucas_logo.jpg)
+
 
 # Environment
 python==3.8
@@ -23,4 +23,4 @@ CUDA_VISIBLE_DEVICES=0 python infer.py --task PRO --test --seed 2022 --run_id we
 
 # Pretrained Models
 
-If you want to use our pretrained models, you can download them based on the [url](https://github.com/lhotse-speech/lhotse/pull/1072/files).
+If you want to use our pretrained models, you can download them based on the .
