@@ -1,5 +1,5 @@
 # Introduction
-MullBind is an accurate predic
+
 
 # Framework
 The framework shows as following picture:
@@ -12,12 +12,7 @@ cuda==11.2
 
 
 # Dataset
-We use ZN as our training dataset. 
-
-# Feature Extract
-## extract graph
-## extract t5
-## fuse graph and t5
+ 
 
 # Running Commands
 Inferring command:
