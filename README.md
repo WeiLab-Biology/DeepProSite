@@ -7,22 +7,13 @@ The framework shows as following picture:
 
 # Environment
 python==3.8
-
 cuda==11.2
-
 python 3.8.16
-
 numpy 1.24.2
-
 pyg-lib 0.1.0+pt113cu116
-
 pyparsing 3.0.9
-
 scikit-learn 1.2.2
-
 six 1.16.0
-
-
 
 # Dataset
  
