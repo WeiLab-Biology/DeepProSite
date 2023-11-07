@@ -39,7 +39,7 @@ python ./pad_feature.py
 # Run DeepProSite for prediction
 Run the following command to predict the binding sites of the sequence in "./datasets/example.fa" on GPU (id=0):
 ```
-CUDA_VISIBLE_DEVICES=0 python ./infer.py --task PRO --test --seed 2022 --run_id weights --dataset_path ./infer_data/PRO/ --feature_path ./infer_data/PRO/
+CUDA_VISIBLE_DEVICES=0 python ./main.py --task PRO --test --seed 2022 --run_id prediction --dataset_path ./datasets/ --feature_path ./feature/
 ```
 # Datasets and models
 The datasets used in this study are stored in `./datasets/`  
