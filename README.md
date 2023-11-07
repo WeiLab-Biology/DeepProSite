@@ -12,14 +12,14 @@ sentencepiece 0.1.96
 transformers 4.15.0
 
 # Install and set up DeepProSite
-**1.** Clone this repository by `git clonehttps://github.com/WeiLab-Biology/DeepProSite.git` or download the code in ZIP archive.
+**1.** Clone this repository by `git clonehttps://github.com/WeiLab-Biology/DeepProSite.git` or download the code in ZIP archive.  
 **2.** Download the [ESMFold](https://github.com/facebookresearch/esm) model and install according to the official tutorials：
 ```
 pip install "fair-esm[esmfold]"
 pip install 'dllogger @ git+https://github.com/NVIDIA/dllogger.git'
 pip install 'openfold @ git+https://github.com/aqlaboratory/openfold.git@4b41059694619831a7db195b7e0988fc4ff3a307'
-```
-**3.** Download the pre-trained ProtT5-XL-UniRef50 model in [here](https://github.com/agemagician/ProtTrans).
+```  
+**3.** Download the pre-trained ProtT5-XL-UniRef50 model in [here](https://github.com/agemagician/ProtTrans).  
 **4.** Add permission to execute for [DSSP](https://github.com/cmbi/dssp)  by `chmod +x ./script/feature_extraction/mkdssp` 
 
 # Run DeepProSite for prediction
