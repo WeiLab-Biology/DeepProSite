@@ -12,7 +12,7 @@ sentencepiece 0.1.96
 transformers 4.15.0
 
 # Install and set up DeepProSite
-**1.** Clone this repository by `git clonehttps://github.com/WeiLab-Biology/DeepProSite.git` or download the code in ZIP archive. The latest version of the code is `DeepProSite-main`.  
+**1.** Clone this repository by `git clonehttps://github.com/WeiLab-Biology/DeepProSite.git` or download the code in ZIP archive. The latest version is `DeepProSite-main`.  
 
 **2.** Download the [ESMFold](https://github.com/facebookresearch/esm) model and install according to the official tutorials：
 ```
