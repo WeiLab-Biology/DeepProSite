@@ -1,7 +1,6 @@
 # Introduction
-
-# Framework
-The framework shows as following picture:
+DeepProSite is a framework for identifying protein binding sites that utilizes protein structure and sequence information. 
+DeepProSite is fast and accurate, and it's easy to install and run. The DeepProSite web server is freely available in [here](https://inner.wei-group.net/DeepProSite).
 
 # System requirement
 python  3.7.11  
@@ -12,19 +11,23 @@ biopython  1.79
 sentencepiece 0.1.96  
 transformers 4.15.0
 
-# Software requirement  
-To run the full & accurate version of DeepProSite, you need to make sure the following software is in the [mkdssp](./mkdssp) directory:  
-[DSSP](https://github.com/cmbi/dssp) (*dssp ver 2.0.4* is Already in this repository).
-The protein structures should be predicted by ESMFold to run DeepProSite:
-Download the ESMFold model [guide](https://github.com/facebookresearch/esm)
-You also need to prepare the pretrained language model ProtTrans:
-Download the pretrained ProtT5-XL-UniRef50 model [guide](https://github.com/agemagician/ProtTrans).
+# Install and set up DeepProSite
+**1.** Clone this repository by `git clonehttps://github.com/WeiLab-Biology/DeepProSite.git` or download the code in ZIP archive.
+**2.** Download the [ESMFold](https://github.com/facebookresearch/esm) model and install according to the official tutorials：
+```
+pip install "fair-esm[esmfold]"
+pip install 'dllogger @ git+https://github.com/NVIDIA/dllogger.git'
+pip install 'openfold @ git+https://github.com/aqlaboratory/openfold.git@4b41059694619831a7db195b7e0988fc4ff3a307'
+```
+**3.** Download the pre-trained ProtT5-XL-UniRef50 model in [here](https://github.com/agemagician/ProtTrans).
+**4.** Add permission to execute for [DSSP](https://github.com/cmbi/dssp)  by `chmod +x ./script/feature_extraction/mkdssp` 
 
-# Running Commands
-Inferring command:
+# Run DeepProSite for prediction
+Run the following command to predict the binding sites of the sequence in "example.fa" on GPU (id=0):
 ```
 CUDA_VISIBLE_DEVICES=0 python infer.py --task PRO --test --seed 2022 --run_id weights --dataset_path infer_data/PRO/ --feature_path infer_data/PRO/
 ```
 
-# Pretrained Models
-If you want to use our pretrained models, you can download them based on the .
+# Datasets and models
+The datasets used in this study are stored in `./datasets/`  
+The trained DeepProSite models can be found in `./model/`
