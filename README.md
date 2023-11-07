@@ -3,12 +3,14 @@
 # Framework
 The framework shows as following picture:
 
-# Environment
+# System requirement
 python  3.7.11  
 numpy  1.21.2  
 pandas  1.1.3  
 torch  1.8.0  
-biopython  1.79
+biopython  1.79  
+sentencepiece 0.1.96  
+transformers 4.15.0
 
 # Software requirement  
 To run the full & accurate version of DeepProSite, you need to make sure the following software is in the [mkdssp](./mkdssp) directory:  
