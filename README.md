@@ -19,6 +19,7 @@ pip install "fair-esm[esmfold]"
 pip install 'dllogger @ git+https://github.com/NVIDIA/dllogger.git'
 pip install 'openfold @ git+https://github.com/aqlaboratory/openfold.git@4b41059694619831a7db195b7e0988fc4ff3a307'
 ```  
+Predicts structures via `python scripts/fold.py -i example/test_protein.fa -o example/pdb --cpu-offload`  
 **3.** Download the pre-trained ProtT5-XL-UniRef50 model in [here](https://github.com/agemagician/ProtTrans).  
 **4.** Add permission to execute for [DSSP](https://github.com/cmbi/dssp)  by `chmod +x ./script/feature_extraction/mkdssp` 
 
