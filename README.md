@@ -20,7 +20,7 @@ pip install "fair-esm[esmfold]"
 pip install 'dllogger @ git+https://github.com/NVIDIA/dllogger.git'
 pip install 'openfold @ git+https://github.com/aqlaboratory/openfold.git@4b41059694619831a7db195b7e0988fc4ff3a307'
 ```  
-Predicts structures via `python scripts/fold.py -i ./datastes/test_protein.fa -o ./datasets/pdb --cpu-offload`  
+Predict structures via `python scripts/fold.py -i ./datastes/test_protein.fa -o ./datasets/pdb --cpu-offload`  
 
 **3.** Download the pre-trained ProtT5-XL-UniRef50 model in [here](https://github.com/agemagician/ProtTrans). The downloaded model is stored in `./pretrained_model/Rostlab/prot_t5_xl_uniref50`.  Extracting language model features and normalize them based on the training set：
 ```
