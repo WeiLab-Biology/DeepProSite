@@ -6,10 +6,8 @@ import datetime
 from tqdm import tqdm
 
 from sklearn.metrics import auc, roc_auc_score, precision_recall_curve
-
-#####我加的1130
 from sklearn.metrics import accuracy_score, f1_score, recall_score, precision_score, roc_auc_score, confusion_matrix, precision_recall_fscore_support
-from sklearn import metrics ###########################################3333
+from sklearn import metrics 
 
 
 from sklearn.model_selection import KFold
@@ -44,7 +42,6 @@ def Metric(preds, labels):
     preds = np.array(preds).reshape(-1)
 
     tn, fp, fn, tp = confusion_matrix(labels, preds > 0.5).ravel()
-    #tn, fp, fn, tp = confusion_matrix(labels, preds > 0).ravel()
     sn = tp / (tp + fn)
     sp = tn / (tn + fp)
     pr = tp / (tp + fp)
@@ -153,7 +150,7 @@ def NN_train_and_predict(train, test, protein_data, model_class, config, logit=F
             if not os.path.exists(output_path + 'fold%s.ckpt'%fold):
                 continue
 
-            if model_class.__name__ in ['GraphTrans', "MetalSite"]:  #Transformer_YQM
+            if model_class.__name__ in ['GraphTrans', "MetalSite"]: 
                 model = model_class(node_features, edge_features, hidden_dim, num_encoder_layers, k_neighbors, augment_eps, dropout)
 
             model.cuda()
@@ -167,7 +164,7 @@ def NN_train_and_predict(train, test, protein_data, model_class, config, logit=F
         print('model count:',len(models))
 
         test_preds = []
-        test_outputs = [] # 用来导出结果到submission.csv
+        test_outputs = []
         test_Y = []
         test_preds4 = [[], [], [], []]
         test_Y4 = [[], [], [], []]
@@ -183,7 +180,7 @@ def NN_train_and_predict(train, test, protein_data, model_class, config, logit=F
                 else:
                     outputs = [model(protein_X, protein_node_features, protein_maskss) for model in models]
                 # print(outputs)
-                outputs = torch.stack(outputs,0).mean(0) # 5个模型预测结果求平均,最终shape=(bsize, max_len)
+                outputs = torch.stack(outputs,0).mean(0)
                 test_outputs.append(outputs.detach().cpu().numpy())
 
                 if task == "Metal":
