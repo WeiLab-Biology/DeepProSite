@@ -1,5 +1,5 @@
 # Introduction
-DeepProSite is a framework for identifying protein binding sites that utilizes protein structure and sequence information. 
+DeepProSite is a framework for identifying protein binding site that utilizes protein structure and sequence information. 
 DeepProSite is fast and accurate, and it's easy to install and run. The DeepProSite web server is freely available in [here](https://inner.wei-group.net/DeepProSite).
 
 # System requirement
