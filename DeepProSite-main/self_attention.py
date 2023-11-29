@@ -26,7 +26,7 @@ def cat_neighbors_nodes(h_nodes, h_neighbors, E_idx):
     return h_nn
 
 
-class Normalize(nn.Module): # layernorm https://blog.csdn.net/shanglianlm/article/details/85075706
+class Normalize(nn.Module): 
     def __init__(self, features, epsilon=1e-6):
         super(Normalize, self).__init__()
         self.gain = nn.Parameter(torch.ones(features))
