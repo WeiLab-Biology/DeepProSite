@@ -169,7 +169,7 @@ def NN_train_and_predict(train, test, protein_data, model_class, config, logit=F
             valid_dataset = TaskDataset(train.loc[val_index].reset_index(drop=True), protein_data, label_name)
             valid_dataloader = DataLoader(valid_dataset, batch_size=batch_size, collate_fn=valid_dataset.collate_fn, shuffle=False, drop_last=False, num_workers=args.num_workers, prefetch_factor=2)
             
-            if model_class.__name__ in ['GraphTrans', 'MetalSite']: #Transformer_YQM
+            if model_class.__name__ in ['GraphTrans', 'MetalSite']: 
                 model = model_class(node_features, edge_features, hidden_dim, num_encoder_layers, k_neighbors, augment_eps, dropout)
 
             model.cuda()
@@ -302,7 +302,7 @@ def NN_train_and_predict(train, test, protein_data, model_class, config, logit=F
             # 用最好的epoch再测试一下validation，并存下一些结果
             state_dict = torch.load(output_path + 'fold%s.ckpt'%fold, torch.device('cuda' if torch.cuda.is_available() else 'cpu') )
 
-            if model_class.__name__ in ['GraphTrans', "MetalSite"]:  #Transformer_YQM
+            if model_class.__name__ in ['GraphTrans', "MetalSite"]:  
                 model = model_class(node_features, edge_features, hidden_dim, num_encoder_layers, k_neighbors, augment_eps, dropout)
 
             model.cuda()
@@ -404,7 +404,7 @@ def NN_train_and_predict(train, test, protein_data, model_class, config, logit=F
             if not os.path.exists(output_path + 'fold%s.ckpt'%fold):
                 continue
 
-            if model_class.__name__ in ['GraphTrans', "MetalSite"]:  #Transformer_YQM
+            if model_class.__name__ in ['GraphTrans', "MetalSite"]:  
                 model = model_class(node_features, edge_features, hidden_dim, num_encoder_layers, k_neighbors, augment_eps, dropout)
 
             model.cuda()
