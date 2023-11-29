@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-###YQM
-# run on gpu2
 import pickle
 import numpy as np
 import torch
@@ -52,11 +50,10 @@ with open("./datasets/test_protein.fa", "rb") as f:
         all_ID.append(idx)
     
 #all_ID = list(GO_train.keys()) + list(GO_valid.keys()) + list(GO_test.keys())
-# all_ID = list(GO_train.keys()) + list(GO_test.keys())    ####只留下train和test
+# all_ID = list(GO_train.keys()) + list(GO_test.keys())    
 for ID in tqdm(all_ID):
     raw_protrans = np.load(raw_protrans_path + ID + ".npy")
     protrans = (raw_protrans - Min_protrans) / (Max_protrans - Min_protrans)
     torch.save(torch.tensor(protrans, dtype = torch.float), protrans_output_path + ID + '.tensor')
     
-    #1129我自己加的
     np.save(protrans_output_path + ID + '.npy', protrans)
