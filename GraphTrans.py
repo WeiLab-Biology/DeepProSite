@@ -49,9 +49,9 @@ class GraphTrans(nn.Module):
 
         # Encoder is unmasked self-attention
         mask_attend = gather_nodes(mask.unsqueeze(-1),  E_idx).squeeze(-1)
-        mask_attend = mask.unsqueeze(-1) * mask_attend # mask_attend [B, L, K] 0/1矩阵 L维度上是0代表是padding的aa，K维度上是0说明这个邻居其实是padding的aa 这条边不存在
+        mask_attend = mask.unsqueeze(-1) * mask_attend # mask_attend [B, L, K]
         for layer in self.encoder_layers:
-            h_EV = cat_neighbors_nodes(h_V, h_E, E_idx) # edge_ij的特征和node_j的特征concat在一起
+            h_EV = cat_neighbors_nodes(h_V, h_E, E_idx) 
             h_V = layer(h_V, h_EV, mask_V=mask, mask_attend=mask_attend)
 
         logits = self.W_out(h_V).squeeze(-1) # [B, L]
