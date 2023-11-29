@@ -56,8 +56,8 @@ class TransformerLayer(nn.Module):
         self.attention = NeighborAttention(num_hidden, num_in, num_heads)
         self.dense = PositionWiseFeedForward(num_hidden, num_hidden * 4)
 
-    def forward(self, h_V, h_E, mask_V=None, mask_attend=None):    # mask_attend [B, L, K] 0/1矩阵 L维度上是0代表是padding的aa，K维度上是0说明这个邻居其实是padding的aa 这条边不存在
-        # Concatenate h_V_i to h_E_ij       这个h_E其实是包含Eij特征以及Vj特征的
+    def forward(self, h_V, h_E, mask_V=None, mask_attend=None):    # mask_attend [B, L, K] 
+        # Concatenate h_V_i to h_E_ij      
         """ Parallel computation of full transformer layer """
         # Self-attention
         dh = self.attention(h_V, h_E, mask_attend)
@@ -67,7 +67,7 @@ class TransformerLayer(nn.Module):
         dh = self.dense(h_V)
         h_V = self.norm[1](h_V + self.dropout(dh))
 
-        if mask_V is not None: # mask掉padding的节点
+        if mask_V is not None: 
             mask_V = mask_V.unsqueeze(-1)
             h_V = mask_V * h_V
         return h_V
@@ -109,8 +109,8 @@ class NeighborAttention(nn.Module):
         """ Self-attention, graph-structured O(Nk)
         Args:
             h_V:            Node features           [N_batch, N_nodes, N_hidden]
-            h_E:            Neighbor features       [N_batch, N_nodes, K, N_hidden] 包含了边特征和邻居的节点特征
-            mask_attend:    Mask for attention      [N_batch, N_nodes, K]           mask_attend [B, L, K] 0/1矩阵 L维度上是0代表是padding的aa，K维度上是0说明这个邻居其实是padding的aa 这条边不存在
+            h_E:            Neighbor features       [N_batch, N_nodes, K, N_hidden] 
+            mask_attend:    Mask for attention      [N_batch, N_nodes, K]           mask_attend [B, L, K] 
         Returns:
             h_V:            Node update
         """
