@@ -44,3 +44,14 @@ CUDA_VISIBLE_DEVICES=0 python ./main.py --task PRO --test --seed 2022 --run_id p
 # Datasets and models
 The datasets used in this study are stored in `./datasets/`  
 The trained DeepProSite models can be found in `./model/`
+
+# Citation and contact
+```
+@article{Fang2023DeepProSiteSP,
+  title={DeepProSite: Structure-aware Protein Binding Site Prediction Using ESMFold and Pretrained Language Model.},
+  author={Yitian Fang and Yi Jiang and Leyi Wei and Qin Ma and Zhixiang Ren and Qianmu Yuan and Dong-Qing Wei},
+  journal={Bioinformatics},
+  year={2023},
+  url={https://api.semanticscholar.org/CorpusID:265497196}
+}
+```
